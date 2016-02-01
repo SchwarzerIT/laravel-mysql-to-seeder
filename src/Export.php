@@ -312,10 +312,11 @@ class Export extends \PDO
      * Generate the Seeder Files.
      *
      * @param null $tables
+     * @param string $pathToSeeds default: './database/seeds'
      * @param array $booleanValues
      * @param array $timestamps
      */
-    public function generateExport($tables = null, $booleanValues = [], $timestamps = ['created_at', 'updated_at'])
+    public function generateExport($tables = null, $pathToSeeds = './database/seeds', $booleanValues = [], $timestamps = ['created_at', 'updated_at'])
     {
         /*
          * For PHP 7
@@ -351,7 +352,7 @@ class Export extends \PDO
 
                 '}';
 
-            file_put_contents( './database/seeds/' . $file . '.php', $content, LOCK_EX);
+            file_put_contents( $pathToSeeds.'/' . $file . '.php', $content, LOCK_EX);
         }
     }
 
