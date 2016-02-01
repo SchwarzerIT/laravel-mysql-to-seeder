@@ -75,7 +75,7 @@ class Export extends \PDO
 
         try {
             parent::__construct($this->dsn, $username, $password, $driver_options);
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             echo 'Connection failed: ' . $e->getMessage();
         }
     }
@@ -148,6 +148,7 @@ class Export extends \PDO
         $sql = 'SHOW TABLES';
         $query = self::prepare($sql, array(parent::ATTR_CURSOR => parent::CURSOR_FWDONLY));
         $query->execute();
+        $results = [];
         $queryResults = $query->fetchAll();
         foreach ($queryResults as $result) {
             $results[] = $result[0];
