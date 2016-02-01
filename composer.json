@@ -1,0 +1,39 @@
+{
+    "name": "schwarzer/laravel-mysql-to-seeder",
+    "description": "MySQL to Laravel >5.1 Seeder",
+    "keywords": [
+        "mysql",
+        "laravel",
+        "seeder"
+    ],
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "André Schwarzer",
+            "email": "andre@schwarzer.it",
+            "homepage": "https://www.schwarzer.it",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "info@schwarzer.it",
+        "docs": "https://www.developer.glass/schwarzer/laravel-mysql-to-seeder"
+    },
+    "require": {
+        "php": ">=5.6"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Schwarzer\\LaravelHelper\\MySQLToSeeder": "src/"
+        }
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/TestCase.php"
+        ]
+    }
+}
