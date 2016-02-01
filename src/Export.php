@@ -1,6 +1,6 @@
 <?php
 /*
- * This is a Helper for Laravel to export
+ * This is a Helper for Laravel to export Data from an existing Database to a Laravel Seeder
  *
  * @author André Schwarzer <andre@schwarzer.it>
  *
