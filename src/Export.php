@@ -94,7 +94,7 @@ class Export extends \PDO
     }
 
     /**
-     * Extends the PDO::exec function. A pre- and suffix is added.
+     * Extends the PDO::prepare function. A pre- and suffix is added.
      *
      * @param string $statement
      * @param array $driver_options
@@ -108,7 +108,7 @@ class Export extends \PDO
     }
 
     /**
-     * Extends the PDO::exec function. A pre- and suffix is added.
+     * Extends the PDO::query function. A pre- and suffix is added.
      *
      * @param string $statement
      *
