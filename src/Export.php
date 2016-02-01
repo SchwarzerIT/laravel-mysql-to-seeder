@@ -317,15 +317,13 @@ class Export extends \PDO
      */
     public function generateExport($tables = null, $booleanValues = [], $timestamps = ['created_at', 'updated_at'])
     {
-        $tables = is_null($tables) ? $this->getAllTableNames() : $tables;
-
         /*
          * For PHP 7
          *
          * foreach ($tables ?? $this->getAllTableNames() as $tablename) {
          *
          */
-        foreach ($tables as $tablename) {
+        foreach ( (is_null($tables) ? $this->getAllTableNames() : $tables) as $tablename) {
 
             // get the entries and transfere the result into a well formatted string
             $entries = self::$indent . preg_replace('/(>) */', '> ', $this->niceExport($this->getAllEntriesFromTable($tablename, $booleanValues, $timestamps), self::$indent));
