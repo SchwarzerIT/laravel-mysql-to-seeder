@@ -28,7 +28,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Schwarzer\\LaravelHelper\\MySQLToSeeder": "src/"
+            "Schwarzer\\LaravelHelper\\MySQLToSeeder\\": "src/"
         }
     },
     "autoload-dev": {
