@@ -18,7 +18,7 @@
     ],
     "support": {
         "email": "info@schwarzer.it",
-        "docs": "https://www.developer.glass/schwarzer/laravel-mysql-to-seeder"
+        "docs": "https://github.com/SchwarzerIT/laravel-mysql-to-seeder"
     },
     "require": {
         "php": ">=5.6"
