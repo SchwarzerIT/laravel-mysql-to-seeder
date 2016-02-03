@@ -26,7 +26,7 @@ I decided to create my own version of a MySQL to Laravel Seeder Tool.
 | 7.0.2       | 5.7.10        |
 
 I welcome all notifications about working environments.
-Just mail me ( [info@schwarzer.it](info@schwarzer.it) ) and
+Just mail me (*info@schwarzer.it*) and
 I'll put it up here, or send a merge request.
 
 ## Simple Examples
