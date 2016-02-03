@@ -9,7 +9,7 @@
  * @see https://stackoverflow.com/questions/1472250/pdo-working-with-table-prefixes?answertab=active#1472677
  *     The following functions are based on "Glass Robot's" answer: __construct , exec , prepare , query  & _tablePrefixSuffix
  * @see https://stackoverflow.com/questions/24316347/how-to-format-var-export-to-php5-4-array-syntax#24316675
- *     The following function is based on "mario's" answer. Second @see link: niceExport
+ *     The following function is based on "mario's" answer: niceExport
  */
 
 namespace Schwarzer\LaravelHelper\MySQLToSeeder;
