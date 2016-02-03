@@ -1,8 +1,8 @@
 # MySQL to Laravel Seeder
 
-[![License](https://poser.pugx.org/schwarzer/laravel-mysql-to-seeder/license)](https://packagist.org/packages/schwarzer/laravel-mysql-to-seeder)
-[![Total Downloads](https://poser.pugx.org/schwarzer/laravel-mysql-to-seeder/downloads)](https://packagist.org/packages/schwarzer/laravel-mysql-to-seeder)
-[![Latest Stable Version](https://poser.pugx.org/schwarzer/laravel-mysql-to-seeder/v/stable)](https://packagist.org/packages/schwarzer/laravel-mysql-to-seeder)
+[![Packagist](https://img.shields.io/packagist/v/schwarzer/laravel-mysql-to-seeder.svg)](https://packagist.org/packages/schwarzer/laravel-mysql-to-seeder)
+[![Packagist](https://img.shields.io/packagist/l/schwarzer/laravel-mysql-to-seeder.svg)](https://packagist.org/packages/schwarzer/laravel-mysql-to-seeder)
+[![Packagist](https://img.shields.io/packagist/dt/schwarzer/laravel-mysql-to-seeder.svg)](https://packagist.org/packages/schwarzer/laravel-mysql-to-seeder)
 
 I was in need of a tool to export Data from an existing MySQL DB to a Laravel Seeder.
 I searched online for it, but found not the right tool I wanted. I stumbled upon the
