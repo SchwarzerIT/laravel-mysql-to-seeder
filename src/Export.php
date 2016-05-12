@@ -14,10 +14,8 @@
 
 namespace Schwarzer\LaravelHelper\MySQLToSeeder;
 
-
 /**
- * Class Export
- * @package Schwarzer\LaravelHelper\MySQLToSeeder
+ * Class Export.
  */
 class Export extends \PDO
 {
@@ -51,24 +49,24 @@ class Export extends \PDO
      *
      * @param $hostname
      * @param $databasename
-     * @param null $username
-     * @param null $password
+     * @param null  $username
+     * @param null  $password
      * @param array $driver_options the default is: array(parent::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8')
-     * @param null $prefix
-     * @param null $suffix
+     * @param null  $prefix
+     * @param null  $suffix
      */
     public function __construct(
         $hostname,
         $databasename,
         $username = null,
         $password = null,
-        $driver_options = array(parent::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'),
+        $driver_options = [parent::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'],
         $prefix = null,
         $suffix = null
     ) {
         date_default_timezone_set('Europe/Berlin');
 
-        $this->dsn = 'mysql:dbname=' . $databasename . ';host=' . $hostname;
+        $this->dsn = 'mysql:dbname='.$databasename.';host='.$hostname;
         $this->databasename = $databasename;
         $this->_table_prefix = $prefix;
         $this->_table_suffix = $suffix;
@@ -76,7 +74,7 @@ class Export extends \PDO
         try {
             parent::__construct($this->dsn, $username, $password, $driver_options);
         } catch (\PDOException $e) {
-            echo 'Connection failed: ' . $e->getMessage();
+            echo 'Connection failed: '.$e->getMessage();
         }
     }
 
@@ -90,6 +88,7 @@ class Export extends \PDO
     public function exec($statement)
     {
         $statement = $this->_tablePrefixSuffix($statement);
+
         return parent::exec($statement);
     }
 
@@ -97,13 +96,14 @@ class Export extends \PDO
      * Extends the PDO::prepare function. A pre- and suffix is added.
      *
      * @param string $statement
-     * @param array $driver_options
+     * @param array  $driver_options
      *
      * @return \PDOStatement
      */
-    public function prepare($statement, $driver_options = array())
+    public function prepare($statement, $driver_options = [])
     {
         $statement = $this->_tablePrefixSuffix($statement);
+
         return parent::prepare($statement, $driver_options);
     }
 
@@ -120,7 +120,7 @@ class Export extends \PDO
         $args = func_get_args();
 
         if (count($args) > 1) {
-            return call_user_func_array(array($this, 'parent::query'), $args);
+            return call_user_func_array([$this, 'parent::query'], $args);
         } else {
             return parent::query($statement);
         }
@@ -146,13 +146,14 @@ class Export extends \PDO
     public function getAllTableNames()
     {
         $sql = 'SHOW TABLES';
-        $query = self::prepare($sql, array(parent::ATTR_CURSOR => parent::CURSOR_FWDONLY));
+        $query = self::prepare($sql, [parent::ATTR_CURSOR => parent::CURSOR_FWDONLY]);
         $query->execute();
         $results = [];
         $queryResults = $query->fetchAll();
         foreach ($queryResults as $result) {
             $results[] = $result[0];
         }
+
         return $results;
     }
 
@@ -166,12 +167,12 @@ class Export extends \PDO
     public function getAllColumnNamesForTable($tablename = null)
     {
         if (is_null($tablename)) {
-            return null;
+            return;
         }
 
-        $sql = 'SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = "' . $this->databasename . '" AND TABLE_NAME = :tablename';
+        $sql = 'SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = "'.$this->databasename.'" AND TABLE_NAME = :tablename';
 
-        $query = self::prepare($sql, array(parent::ATTR_CURSOR => parent::CURSOR_FWDONLY));
+        $query = self::prepare($sql, [parent::ATTR_CURSOR => parent::CURSOR_FWDONLY]);
 
         $query->bindValue(':tablename', $tablename, parent::PARAM_STR);
 
@@ -182,6 +183,7 @@ class Export extends \PDO
         foreach ($queryResults as $result) {
             $results[] = $result[0];
         }
+
         return $results;
     }
 
@@ -195,12 +197,12 @@ class Export extends \PDO
     public function getAllColumnTypesForTable($tablename = null)
     {
         if (is_null($tablename)) {
-            return null;
+            return;
         }
 
-        $sql = 'SELECT COLUMN_TYPE, COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = "' . $this->databasename . '" AND TABLE_NAME = :tablename';
+        $sql = 'SELECT COLUMN_TYPE, COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = "'.$this->databasename.'" AND TABLE_NAME = :tablename';
 
-        $query = self::prepare($sql, array(parent::ATTR_CURSOR => parent::CURSOR_FWDONLY));
+        $query = self::prepare($sql, [parent::ATTR_CURSOR => parent::CURSOR_FWDONLY]);
 
         $query->bindValue(':tablename', $tablename, parent::PARAM_STR);
 
@@ -211,6 +213,7 @@ class Export extends \PDO
         foreach ($queryResults as $result) {
             $results[$result['COLUMN_NAME']] = $result['COLUMN_TYPE'];
         }
+
         return $results;
     }
 
@@ -229,13 +232,14 @@ class Export extends \PDO
                 $results[$tablename][] = $result;
             }
         }
+
         return $results;
     }
 
     /**
      * Get all Entries for a specific or all Tables from the given DB.
      *
-     * @param null $tablename
+     * @param null  $tablename
      * @param array $booleanValues
      * @param array $timestamps
      * @param array $dates
@@ -249,12 +253,12 @@ class Export extends \PDO
         $dates = ['birthday']
     ) {
         if (is_null($tablename) || !is_string($tablename)) {
-            return null;
+            return;
         }
 
-        $sql = 'SELECT * FROM ' . $tablename;
+        $sql = 'SELECT * FROM '.$tablename;
 
-        $query = self::prepare($sql, array(parent::ATTR_CURSOR => parent::CURSOR_FWDONLY));
+        $query = self::prepare($sql, [parent::ATTR_CURSOR => parent::CURSOR_FWDONLY]);
 
         $query->execute();
 
@@ -268,14 +272,12 @@ class Export extends \PDO
         foreach ($queryResults as $rowKey => $row) {
             foreach ($row as $key => $value) {
 
-
                 //check if the $key of the current $row's column is in the available $columns for the table(name)
                 if (is_string($key) && in_array($key, $columns)) {
 
                     // if the $key is mentioned in the $booleanValues, force it into boolean
                     if (in_array($key, $booleanValues)) {
-                        $results[$rowKey][$key] = (bool)$value;
-
+                        $results[$rowKey][$key] = (bool) $value;
 
                         // if the $key is mentioned in the $timestamps, replace null, '' and 0000-00-00 00:00:00 with $now
                     } elseif (in_array($key,
@@ -305,16 +307,17 @@ class Export extends \PDO
                 }
             }
         }
+
         return $results;
     }
 
     /**
      * Generate the Seeder Files.
      *
-     * @param null $tables
-     * @param string $pathToSeeds default: './database/seeds'
-     * @param array $booleanValues
-     * @param array $timestamps
+     * @param null   $tables
+     * @param string $pathToSeeds   default: './database/seeds'
+     * @param array  $booleanValues
+     * @param array  $timestamps
      */
     public function generateExport($tables = null, $pathToSeeds = './database/seeds', $booleanValues = [], $timestamps = ['created_at', 'updated_at'])
     {
@@ -324,35 +327,35 @@ class Export extends \PDO
          * foreach ($tables ?? $this->getAllTableNames() as $tablename) {
          *
          */
-        foreach ( (is_null($tables) ? $this->getAllTableNames() : $tables) as $tablename) {
+        foreach ((is_null($tables) ? $this->getAllTableNames() : $tables) as $tablename) {
 
             // get the entries and transfere the result into a well formatted string
-            $entries = self::$indent . preg_replace('/(>) */', '> ', $this->niceExport($this->getAllEntriesFromTable($tablename, $booleanValues, $timestamps), self::$indent));
+            $entries = self::$indent.preg_replace('/(>) */', '> ', $this->niceExport($this->getAllEntriesFromTable($tablename, $booleanValues, $timestamps), self::$indent));
 
             // uppercase the table's name
-            $file = ucfirst($tablename) . 'TableSeeder';
+            $file = ucfirst($tablename).'TableSeeder';
 
             // compose the output
             $content =
-                '<?php' . "\n\n" .
+                '<?php'."\n\n".
 
-                'use Illuminate\Database\Seeder;' . "\n\n" .
+                'use Illuminate\Database\Seeder;'."\n\n".
 
-                'class ' . $file . ' extends Seeder {' . "\n" .
+                'class '.$file.' extends Seeder {'."\n".
 
-                '    public function run() {' . "\n" .
+                '    public function run() {'."\n".
 
-                '        $entries = ' . "\n" . $entries . ';' . "\n\n\n" .
+                '        $entries = '."\n".$entries.';'."\n\n\n".
 
-                '        foreach($entries as $entry){' . "\n" .
-                '            DB::table(\'' . $tablename . '\')->insert($entry);' . "\n" .
-                '        }' . "\n" .
+                '        foreach($entries as $entry){'."\n".
+                '            DB::table(\''.$tablename.'\')->insert($entry);'."\n".
+                '        }'."\n".
 
-                '    }' . "\n" .
+                '    }'."\n".
 
                 '}';
 
-            file_put_contents( $pathToSeeds.'/' . $file . '.php', $content, LOCK_EX);
+            file_put_contents($pathToSeeds.'/'.$file.'.php', $content, LOCK_EX);
         }
     }
 
@@ -368,16 +371,17 @@ class Export extends \PDO
     {
         switch (gettype($var)) {
             case 'string':
-                return '"' . addcslashes($var, "\\\$\"\r\n\t\v\f") . '"';
+                return '"'.addcslashes($var, "\\\$\"\r\n\t\v\f").'"';
             case 'array':
                 $indexed = array_keys($var) === range(0, count($var) - 1);
                 $r = [];
                 foreach ($var as $key => $value) {
                     $r[] = "$indent    "
-                        . ($indexed ? "" : $this->niceExport($key) . " => ")
-                        . $this->niceExport($value, "$indent    ");
+                        .($indexed ? '' : $this->niceExport($key).' => ')
+                        .$this->niceExport($value, "$indent    ");
                 }
-                return "[\n" . implode(",\n", $r) . "\n" . $indent . "]";
+
+                return "[\n".implode(",\n", $r)."\n".$indent.']';
             case 'boolean':
                 return $var ? 'true' : 'false';
             case 'NULL':
