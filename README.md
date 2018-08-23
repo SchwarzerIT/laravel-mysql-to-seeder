@@ -41,7 +41,7 @@ Create a file named export.php in your Laravel root (*where your `.env` is*) and
 
 require_once __DIR__.'/path/to/schwarzer/laravel-mysql-to-seeder/src/Export.php';
 
-$export = new Export('hostname','database','username','password');
+$export = new \Schwarzer\LaravelHelper\MySQLToSeeder\Export('hostname','database','username','password');
 
 $export->generateExport(
     null, // null equals "All Tables" ( $this->getAllTableNames() )
