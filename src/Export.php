@@ -54,6 +54,7 @@ class Export extends \PDO
      * @param array $driver_options the default is: array(parent::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8')
      * @param null  $prefix
      * @param null  $suffix
+     * @param int   $port
      */
     public function __construct(
         $hostname,
@@ -62,11 +63,12 @@ class Export extends \PDO
         $password = null,
         $driver_options = [parent::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'],
         $prefix = null,
-        $suffix = null
+        $suffix = null,
+        $port = 3306
     ) {
         date_default_timezone_set('Europe/Berlin');
 
-        $this->dsn = 'mysql:dbname='.$databasename.';host='.$hostname;
+        $this->dsn = 'mysql:dbname='.$databasename.';host='.$hostname.';port='.$port;
         $this->databasename = $databasename;
         $this->_table_prefix = $prefix;
         $this->_table_suffix = $suffix;
